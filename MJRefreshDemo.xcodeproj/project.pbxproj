@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		710105A92536D14B00FE5376 /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710105A82536D14B00FE5376 /* ExampleViewController.swift */; };
 		71685FF725356E040078FE45 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71685FF625356E040078FE45 /* AppDelegate.swift */; };
 		71685FF925356E040078FE45 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71685FF825356E040078FE45 /* SceneDelegate.swift */; };
 		71685FFB25356E040078FE45 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71685FFA25356E040078FE45 /* ViewController.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		710105A82536D14B00FE5376 /* ExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		71685FF325356E040078FE45 /* MJRefreshDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MJRefreshDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71685FF625356E040078FE45 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71685FF825356E040078FE45 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				71685FF625356E040078FE45 /* AppDelegate.swift */,
 				71685FF825356E040078FE45 /* SceneDelegate.swift */,
 				71685FFA25356E040078FE45 /* ViewController.swift */,
+				710105A82536D14B00FE5376 /* ExampleViewController.swift */,
 				71685FFC25356E040078FE45 /* Main.storyboard */,
 				71685FFF25356E070078FE45 /* Assets.xcassets */,
 				7168600125356E070078FE45 /* LaunchScreen.storyboard */,
@@ -360,6 +363,7 @@
 				7168612125356F8B0078FE45 /* MJRefreshBackNormalFooter.m in Sources */,
 				71685FF925356E040078FE45 /* SceneDelegate.swift in Sources */,
 				716860ED25356F410078FE45 /* MJRefreshConfig.m in Sources */,
+				710105A92536D14B00FE5376 /* ExampleViewController.swift in Sources */,
 				716860EC25356F410078FE45 /* MJRefreshConst.m in Sources */,
 				716860FD25356F590078FE45 /* MJRefreshHeader.m in Sources */,
 			);

@@ -99,7 +99,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // prama MARK - UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let ex = self.examples[indexPath.section][indexPath.row]
+        let vc = ExampleViewController()
+        vc.modalPresentationStyle = .fullScreen
+        vc.componentTitle = ex.title
+        self.present(vc, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
