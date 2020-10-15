@@ -44,6 +44,11 @@
 
 - (void)placeSubviews{}
 
+/**
+ *  desc: 即将被父视图加入或者移除时调用。
+ *
+ *  newSuperview: 为空表示移除，不为空表示加入。
+ */
 - (void)willMoveToSuperview:(UIView *)newSuperview
 {
     [super willMoveToSuperview:newSuperview];

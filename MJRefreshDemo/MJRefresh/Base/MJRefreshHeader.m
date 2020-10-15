@@ -39,7 +39,7 @@ NSString * const MJRefreshHeaderRefreshingBoundsKey = @"MJRefreshHeaderRefreshin
     // 设置key
     self.lastUpdatedTimeKey = MJRefreshHeaderLastUpdatedTimeKey;
     
-    // 设置高度
+    // 设置Header高度
     self.mj_h = MJRefreshHeaderHeight;
 }
 
@@ -68,6 +68,7 @@ NSString * const MJRefreshHeaderRefreshingBoundsKey = @"MJRefreshHeaderRefreshin
     }
 }
 
+/** 当scrollView的contentOffset发生改变的时候调用 */
 - (void)scrollViewContentOffsetDidChange:(NSDictionary *)change
 {
     [super scrollViewContentOffsetDidChange:change];
