@@ -24,6 +24,8 @@
 }
 
 #pragma mark - 实现父类的方法
+
+/** 当scrollView的contentOffset发生改变的时候调用 */
 - (void)scrollViewContentOffsetDidChange:(NSDictionary *)change
 {
     [super scrollViewContentOffsetDidChange:change];
@@ -51,6 +53,8 @@
     if (self.scrollView.isDragging) {
         self.pullingPercent = pullingPercent;
         // 普通 和 即将刷新 的临界点
+        
+        // footer 视图完全露出的临界值（偏移量）
         CGFloat normal2pullingOffsetY = happenOffsetY + self.mj_h;
         
         if (self.state == MJRefreshStateIdle && currentOffsetY > normal2pullingOffsetY) {
@@ -107,6 +111,8 @@
         
         CGFloat deltaH = [self heightForContentBreakView];
         // 刚刷新完毕
+        // 内容高度 > 控件高度
+        // 刷新前后的数据量不一致
         if (MJRefreshStateRefreshing == oldState && deltaH > 0 && self.scrollView.mj_totalDataCount != self.lastRefreshCount) {
             self.scrollView.mj_offsetY = self.scrollView.mj_offsetY;
         }
@@ -117,10 +123,15 @@
         [UIView animateWithDuration:MJRefreshFastAnimationDuration animations:^{
             CGFloat bottom = self.mj_h + self.scrollViewOriginalInset.bottom;
             CGFloat deltaH = [self heightForContentBreakView];
-            if (deltaH < 0) { // 如果内容高度小于view的高度
+            if (deltaH < 0) {
+                // 如果内容高度小于view的高度
                 bottom -= deltaH;
             }
+            
+            // 计算并记录结束时需要用到的InsetB值
             self.lastBottomDelta = bottom - self.scrollView.mj_insetB;
+            
+            // 为scrollView设置新的insetBottom和偏移值，以停留显示footer控件
             self.scrollView.mj_insetB = bottom;
             self.scrollView.mj_offsetY = [self happenOffsetY] + self.mj_h;
         } completion:^(BOOL finished) {
@@ -140,9 +151,12 @@
 - (CGFloat)happenOffsetY
 {
     CGFloat deltaH = [self heightForContentBreakView];
+    // 内容和视图的高度差
     if (deltaH > 0) {
+        //  内容高度 > 视图高度
         return deltaH - self.scrollViewOriginalInset.top;
     } else {
+        // 内容高度 < 视图高度
         return - self.scrollViewOriginalInset.top;
     }
 }

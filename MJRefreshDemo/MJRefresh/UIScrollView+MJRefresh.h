@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) MJRefreshTrailer *mj_trailer;
 
 #pragma mark - other
+// 子控件数量
+// tableView的cell数 或 collocationView的item数
 - (NSInteger)mj_totalDataCount;
 
 @end

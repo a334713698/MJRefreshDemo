@@ -59,7 +59,11 @@ NSString * const MJRefreshHeaderRefreshingBoundsKey = @"MJRefreshHeaderRefreshin
     }
     
     // sectionheader停留解决
+    
+    // 上边距的值
     CGFloat insetT = - self.scrollView.mj_offsetY > _scrollViewOriginalInset.top ? - self.scrollView.mj_offsetY : _scrollViewOriginalInset.top;
+    
+    // 取 上边距 和 视图高度+scrollView原始上边距 之间较小的那个值
     insetT = insetT > self.mj_h + _scrollViewOriginalInset.top ? self.mj_h + _scrollViewOriginalInset.top : insetT;
     self.insetTDelta = _scrollViewOriginalInset.top - insetT;
     // 避免 CollectionView 在使用根据 Autolayout 和 内容自动伸缩 Cell, 刷新时导致的 Layout 异常渲染问题
@@ -92,22 +96,32 @@ NSString * const MJRefreshHeaderRefreshingBoundsKey = @"MJRefreshHeaderRefreshin
     if (offsetY > happenOffsetY) return;
     
     // 普通 和 即将刷新 的临界点
-    CGFloat normal2pullingOffsetY = happenOffsetY - self.mj_h;
-    CGFloat pullingPercent = (happenOffsetY - offsetY) / self.mj_h;
+    CGFloat normal2pullingOffsetY = happenOffsetY - self.mj_h; //即将刷新临界点
+    
+    CGFloat pullingPercent = (happenOffsetY - offsetY) / self.mj_h; // heder视图露出的百分比
     
     if (self.scrollView.isDragging) { // 如果正在拖拽
         self.pullingPercent = pullingPercent;
+        
+        // 当拖拽时的偏移量大于临界值，且原状态为闲置时，将状态置为即将刷新
         if (self.state == MJRefreshStateIdle && offsetY < normal2pullingOffsetY) {
             // 转为即将刷新状态
             self.state = MJRefreshStatePulling;
-        } else if (self.state == MJRefreshStatePulling && offsetY >= normal2pullingOffsetY) {
+        }
+        // 当拖拽时的偏移量小于临界值，且原状态为即将刷新时，将状态重置会闲置
+        else if (self.state == MJRefreshStatePulling && offsetY >= normal2pullingOffsetY) {
             // 转为普通状态
             self.state = MJRefreshStateIdle;
         }
-    } else if (self.state == MJRefreshStatePulling) {// 即将刷新 && 手松开
+    }
+    // 原状态为即将刷新，且手已松开
+    else if (self.state == MJRefreshStatePulling) {
         // 开始刷新
         [self beginRefreshing];
-    } else if (pullingPercent < 1) {
+    }
+    // 未达到刷新的偏移量，且手已松开
+    else if (pullingPercent < 1) {
+        // 记录header露出的百分比
         self.pullingPercent = pullingPercent;
     }
 }

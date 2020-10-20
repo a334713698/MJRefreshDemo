@@ -11,6 +11,8 @@
 @interface MJRefreshAutoFooter()
 /** 一个新的拖拽 */
 @property (nonatomic) BOOL triggerByDrag;
+
+/** 剩余的（自动）触发次数 */
 @property (nonatomic) NSInteger leftTriggerTimes;
 @end
 
@@ -57,6 +59,9 @@
     // 设置为默认状态
     self.automaticallyRefresh = YES;
     
+    // 自动触发次数, 默认为 1
+    // -1 时，无限加载
+    // 仅在拖拽 ScrollView 时才生效
     self.autoTriggerTimes = 1;
 }
 
@@ -74,7 +79,8 @@
     
     if (self.state != MJRefreshStateIdle || !self.automaticallyRefresh || self.mj_y == 0) return;
     
-    if (_scrollView.mj_insetT + _scrollView.mj_contentH > _scrollView.mj_h) { // 内容超过一个屏幕
+    // 内容超出控件高度
+    if (_scrollView.mj_insetT + _scrollView.mj_contentH > _scrollView.mj_h) {
         // 这里的_scrollView.mj_contentH替换掉self.mj_y更为合理
         if (_scrollView.mj_offsetY >= _scrollView.mj_contentH - _scrollView.mj_h + self.mj_h * self.triggerAutomaticallyRefreshPercent + _scrollView.mj_insetB - self.mj_h) {
             // 防止手松开时连续调用
@@ -102,12 +108,14 @@
     switch (panState) {
         // 手松开
         case UIGestureRecognizerStateEnded: {
-            if (_scrollView.mj_insetT + _scrollView.mj_contentH <= _scrollView.mj_h) {  // 不够一个屏幕
+            if (_scrollView.mj_insetT + _scrollView.mj_contentH <= _scrollView.mj_h) {
+                // 不够一个屏幕
                 if (_scrollView.mj_offsetY >= - _scrollView.mj_insetT) { // 向上拽
                     self.triggerByDrag = YES;
                     [self beginRefreshing];
                 }
-            } else { // 超出一个屏幕
+            } else {
+                // 超出一个屏幕
                 if (_scrollView.mj_offsetY >= _scrollView.mj_contentH + _scrollView.mj_insetB - _scrollView.mj_h) {
                     self.triggerByDrag = YES;
                     [self beginRefreshing];
@@ -126,12 +134,14 @@
     }
 }
 
+// 是否进行无限触发
 - (BOOL)unlimitedTrigger {
     return self.leftTriggerTimes == -1;
 }
 
 - (void)beginRefreshing
 {
+    // 当前在拖拽 && 剩余触发次数 && 是否无限触发
     if (self.triggerByDrag && self.leftTriggerTimes <= 0 && !self.unlimitedTrigger) {
         return;
     }
