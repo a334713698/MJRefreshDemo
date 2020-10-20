@@ -10,7 +10,7 @@ import UIKit
 class ExampleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var componentTitle: String?
-    
+    var dataCount = 10
     
     // prama MARK - Property
     private lazy var tableView: UITableView = {
@@ -72,7 +72,6 @@ class ExampleViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         case "MJRefreshAutoFooter":do {
             self.tableView.mj_footer = MJRefreshAutoFooter.init(refreshingTarget: self, refreshingAction: #selector(loadMoreData))
-
         }
         case "MJRefreshAutoStateFooter":do {
             self.tableView.mj_footer = MJRefreshAutoStateFooter.init(refreshingTarget: self, refreshingAction: #selector(loadMoreData))
@@ -105,12 +104,12 @@ class ExampleViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.dataCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        
+        cell.textLabel?.text = "\(indexPath.row)"
         return cell
     }
     
@@ -133,11 +132,15 @@ class ExampleViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @objc func loadNewData() {
         print("下拉刷新")
+        self.dataCount = 10
+        self.tableView.reloadData()
         self.tableView.mj_header?.endRefreshing()
     }
     
     @objc func loadMoreData() {
         print("上拉加载")
+        self.dataCount += 2
+        self.tableView.reloadData()
         self.tableView.mj_footer?.endRefreshing()
     }
 }
