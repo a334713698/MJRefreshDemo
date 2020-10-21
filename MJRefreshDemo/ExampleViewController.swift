@@ -71,6 +71,7 @@ class ExampleViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         }
         case "MJRefreshAutoFooter":do {
+            self.tableView.isPagingEnabled = true
             self.tableView.mj_footer = MJRefreshAutoFooter.init(refreshingTarget: self, refreshingAction: #selector(loadMoreData))
         }
         case "MJRefreshAutoStateFooter":do {

@@ -79,9 +79,14 @@
     
     if (self.state != MJRefreshStateIdle || !self.automaticallyRefresh || self.mj_y == 0) return;
     
+    // 当autoTriggerTimes被设置成-1（滚动时无限加载）
+    // 该方法保证拖动放手后，视图还在滚动的情况下，一直保持加载状态
+    
     // 内容超出控件高度
     if (_scrollView.mj_insetT + _scrollView.mj_contentH > _scrollView.mj_h) {
-        // 这里的_scrollView.mj_contentH替换掉self.mj_y更为合理
+        
+        //  内容高度 - 控件高度 + 控件底部边距 + footer高度 * 百分比 - footer高度
+        //  内容高度 - 控件高度 + 控件底部边距
         if (_scrollView.mj_offsetY >= _scrollView.mj_contentH - _scrollView.mj_h + self.mj_h * self.triggerAutomaticallyRefreshPercent + _scrollView.mj_insetB - self.mj_h) {
             // 防止手松开时连续调用
             CGPoint old = [change[@"old"] CGPointValue];
@@ -109,13 +114,13 @@
         // 手松开
         case UIGestureRecognizerStateEnded: {
             if (_scrollView.mj_insetT + _scrollView.mj_contentH <= _scrollView.mj_h) {
-                // 不够一个屏幕
+                // 内容 < 控件高度
                 if (_scrollView.mj_offsetY >= - _scrollView.mj_insetT) { // 向上拽
                     self.triggerByDrag = YES;
                     [self beginRefreshing];
                 }
             } else {
-                // 超出一个屏幕
+                // 内容 > 控件高度
                 if (_scrollView.mj_offsetY >= _scrollView.mj_contentH + _scrollView.mj_insetB - _scrollView.mj_h) {
                     self.triggerByDrag = YES;
                     [self beginRefreshing];
@@ -154,6 +159,7 @@
     MJRefreshCheckState
     
     if (state == MJRefreshStateRefreshing) {
+        // 执行加载数据回调
         [self executeRefreshingCallback];
     } else if (state == MJRefreshStateNoMoreData || state == MJRefreshStateIdle) {
         if (self.triggerByDrag) {
@@ -163,7 +169,10 @@
             self.triggerByDrag = NO;
         }
         
+        /** 结束刷新 */
         if (MJRefreshStateRefreshing == oldState) {
+            
+            // 当视图开启了分页显示，设置动画和回调
             if (self.scrollView.pagingEnabled) {
                 CGPoint offset = self.scrollView.contentOffset;
                 offset.y -= self.scrollView.mj_insetB;
@@ -178,9 +187,11 @@
                         self.endRefreshingCompletionBlock();
                     }
                 }];
+                
                 return;
             }
             
+            // 结束刷新回调
             if (self.endRefreshingCompletionBlock) {
                 self.endRefreshingCompletionBlock();
             }
