@@ -52,7 +52,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let ex4_stateTrailer = MJExample.init("MJRefreshStateTrailer", ViewController.self)
         let ex4_normalTrailer = MJExample.init("MJRefreshNormalTrailer", ViewController.self)
-        examples.append([ex4_baseTrailer])
+        examples.append([ex4_baseTrailer, ex4_stateTrailer, ex4_normalTrailer])
         
         return examples
     }()
@@ -64,6 +64,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.dataSource = self
         tableView.delegate = self
         tableView.showsVerticalScrollIndicator = false
+        tableView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 30, right: 0)
         tableView.separatorInset = UIEdgeInsets.zero
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.estimatedSectionHeaderHeight = 30

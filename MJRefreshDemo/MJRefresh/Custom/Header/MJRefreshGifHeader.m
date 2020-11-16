@@ -74,6 +74,7 @@
     self.labelLeftInset = 20;
 }
 
+// 通过拖拽百分比设置 Idle~Pulling状态之间的 对应的动画帧
 - (void)setPullingPercent:(CGFloat)pullingPercent
 {
     [super setPullingPercent:pullingPercent];
@@ -115,6 +116,7 @@
     
     // 根据状态做事情
     if (state == MJRefreshStatePulling || state == MJRefreshStateRefreshing) {
+        // 即将刷新 和 刷新中 状态的动画
         NSArray *images = self.stateImages[@(state)];
         if (images.count == 0) return;
         
@@ -127,6 +129,7 @@
             [self.gifView startAnimating];
         }
     } else if (state == MJRefreshStateIdle) {
+        // 限制状态停止动画
         [self.gifView stopAnimating];
     }
 }

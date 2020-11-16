@@ -193,12 +193,12 @@
 		7168609A25356F010078FE45 /* Back */ = {
 			isa = PBXGroup;
 			children = (
-				7168611E25356F8B0078FE45 /* MJRefreshBackGifFooter.h */,
-				7168611A25356F8B0078FE45 /* MJRefreshBackGifFooter.m */,
-				7168611D25356F8B0078FE45 /* MJRefreshBackNormalFooter.h */,
-				7168611B25356F8B0078FE45 /* MJRefreshBackNormalFooter.m */,
 				7168611F25356F8B0078FE45 /* MJRefreshBackStateFooter.h */,
 				7168611C25356F8B0078FE45 /* MJRefreshBackStateFooter.m */,
+				7168611D25356F8B0078FE45 /* MJRefreshBackNormalFooter.h */,
+				7168611B25356F8B0078FE45 /* MJRefreshBackNormalFooter.m */,
+				7168611E25356F8B0078FE45 /* MJRefreshBackGifFooter.h */,
+				7168611A25356F8B0078FE45 /* MJRefreshBackGifFooter.m */,
 			);
 			path = Back;
 			sourceTree = "<group>";
@@ -206,12 +206,12 @@
 		716860A125356F010078FE45 /* Auto */ = {
 			isa = PBXGroup;
 			children = (
-				7168611525356F840078FE45 /* MJRefreshAutoGifFooter.h */,
-				7168611125356F840078FE45 /* MJRefreshAutoGifFooter.m */,
-				7168611025356F840078FE45 /* MJRefreshAutoNormalFooter.h */,
-				7168611225356F840078FE45 /* MJRefreshAutoNormalFooter.m */,
 				7168611325356F840078FE45 /* MJRefreshAutoStateFooter.h */,
 				7168611425356F840078FE45 /* MJRefreshAutoStateFooter.m */,
+				7168611025356F840078FE45 /* MJRefreshAutoNormalFooter.h */,
+				7168611225356F840078FE45 /* MJRefreshAutoNormalFooter.m */,
+				7168611525356F840078FE45 /* MJRefreshAutoGifFooter.h */,
+				7168611125356F840078FE45 /* MJRefreshAutoGifFooter.m */,
 			);
 			path = Auto;
 			sourceTree = "<group>";
@@ -232,10 +232,10 @@
 			children = (
 				7168610425356F6C0078FE45 /* MJRefreshStateHeader.h */,
 				7168610625356F6C0078FE45 /* MJRefreshStateHeader.m */,
-				7168610725356F6C0078FE45 /* MJRefreshGifHeader.h */,
-				7168610925356F6C0078FE45 /* MJRefreshGifHeader.m */,
 				7168610825356F6C0078FE45 /* MJRefreshNormalHeader.h */,
 				7168610525356F6C0078FE45 /* MJRefreshNormalHeader.m */,
+				7168610725356F6C0078FE45 /* MJRefreshGifHeader.h */,
+				7168610925356F6C0078FE45 /* MJRefreshGifHeader.m */,
 			);
 			path = Header;
 			sourceTree = "<group>";
