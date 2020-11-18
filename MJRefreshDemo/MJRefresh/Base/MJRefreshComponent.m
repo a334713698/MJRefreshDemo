@@ -42,7 +42,9 @@
     [super layoutSubviews];
 }
 
-- (void)placeSubviews{}
+- (void)placeSubviews{
+    NSLog(@"%s", __func__);
+}
 
 /**
  *  desc: 即将被父视图加入或者移除时调用。

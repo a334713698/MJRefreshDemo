@@ -119,8 +119,10 @@ class ExampleViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         }
         case "MJRefreshAutoNormalFooter":do {
-            self.tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingTarget: self, refreshingAction: #selector(loadMoreData))
-
+            let mj_footer: MJRefreshAutoNormalFooter = MJRefreshAutoNormalFooter.init(refreshingTarget: self, refreshingAction: #selector(loadMoreData))
+            mj_footer.autoTriggerTimes = 2
+            mj_footer.triggerAutomaticallyRefreshPercent = 0.1
+            self.tableView.mj_footer = mj_footer
         }
         case "MJRefreshAutoGifFooter":do {
 

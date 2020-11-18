@@ -146,7 +146,7 @@
 
 - (void)beginRefreshing
 {
-    // 当前在拖拽 && 剩余触发次数 && 是否无限触发
+    // 新的拖拽动作 && 剩余触发次数 && 是否无限触发
     if (self.triggerByDrag && self.leftTriggerTimes <= 0 && !self.unlimitedTrigger) {
         return;
     }
